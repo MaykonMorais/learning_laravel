@@ -6,16 +6,17 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\Site\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('Site')->group(function() {
-    Route::get('/', HomeController::class, 'index');
+Route::get('/', HomeController::class, 'index')->name('site.home');
 
-    Route::get('produtos', [CategoryController::class, 'index']); 
-    Route::get('produtos/{slug}', [CategoryController::class, 'show']);
+Route::get('produtos', [CategoryController::class, 'index'])->name('site.products'); 
+Route::get('produtos/{slug}', [CategoryController::class, 'show'])->name('site.products.category');
 
-    Route::get('blog', BlogController::class, 'index'); /** invokable */
+Route::get('blog', BlogController::class, 'index')->name('site.blog'); /** invokable */
 
-    Route::view('sobre', 'site.about.index');
+Route::view('sobre', 'site.about.index')->name('site.about');
 
-    Route::get('contato', [ContatoController::class, 'index']);
-    Route::post('contato', [ContatoController::class, 'form']);
-});
+Route::get('contato', [ContatoController::class, 'index'])->name('site.contact');
+Route::post('contato', [ContatoController::class, 'form'])->name('site.contact.form');
+
+
+
